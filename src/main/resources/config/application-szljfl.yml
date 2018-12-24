@@ -1,0 +1,6 @@
+#业务平台ip地址(深圳垃圾分类)
+sys_api_url: http://172.18.102.62:20004
+#腾讯微信公众号服务器配置(深圳垃圾分类)
+wechat_api_url: /wechat
+#业务系统接口之微信用户注册(深圳垃圾分类)
+sys_api_addUser: /wechatUser

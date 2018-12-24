@@ -1,0 +1,9 @@
+
+#腾讯微信公众号服务器配置(一体车联)
+wechat_api_url: /wechat
+
+
+#业务平台ip地址(一体车联)
+sys_api_url: http://113.106.86.11:9093
+#业务系统接口之微信用户注册(一体车联)
+sys_api_addUser: /wechatUser

@@ -1,0 +1,7 @@
+#业务平台ip地址(ET健康管理服务站，测试环境)
+sys_api_url: http://medical.fvzz.cn:80/
+#腾讯微信公众号服务器配置(ET健康管理服务站,测试环境)
+wechat_api_url: /wechat
+#业务系统接口之微信用户注册(ET健康管理服务站，测试环境)
+sys_api_addUser: /medical-mobile/wechatuser
+#sys_api_addUser: /wechatuser

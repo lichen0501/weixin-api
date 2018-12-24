@@ -1,0 +1,6 @@
+#业务平台ip地址(新钜物联)
+sys_api_url: http://139.199.153.224
+#腾讯微信公众号服务器配置(新钜物联)
+wechat_api_url: /wechat
+#业务系统接口之微信用户注册(新钜物联)
+sys_api_addUser: /wechatUser

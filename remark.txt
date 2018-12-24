@@ -1,0 +1,106 @@
+本项目注意事项：
+一、本项目包含有4个微信公众号的环境切换。切换公众号步骤共两步：
+   1）在src/main/resoureces/wechat/wechat.properties文件中的key名为wechat指明切换哪个公众号；
+   2）在src/main/resoureces/config/application.yml文件中 key名为spring.profiles.active指定哪个公众号的环境。
+   注意，切换公众号环境不需要修改代码。一体车联因公司暂无80外网端口服务器，故暂时无法使用，当有外网80端口可用时，需在src/main/resoureces/wechat/wechat_etsk.properties配置nginx_host图片服务器地址。
+   
+二、垃圾分类项目正式和测试服务器配置信息： 
+	正式环境：外网112.74.187.186 内网172.18.102.62有外网映射，内网172.18.83.72无外网映射
+	1）后台应用
+	user-platform            用户平台后台接口,部署服务器内网地址：           172.18.83.72       端口: 8805        /opt/app/user-platform
+	trash-manage             业务系统后台管理接口,部署服务器内网地址：       172.18.83.72       端口: 20003      /opt/app/trash-manage
+	trash-manage-wx          微信前端接口,部署服务器内网地址：               172.18.102.62      端口: 20004        /opt/app/trash-manage-wx
+	wechat-api               与微信公众号交互服务,部署服务器内网地址：       172.18.102.62      端口: 9998      /appservice/wechat
+	2)前端页面
+	user-platform-ui         用户平台前端页面,部署服务器内网地址：           172.18.102.62      nginx服务端口：9092   /usr/share/nginx/html/user-platform-ui
+	trash-manage-ui          业务系统后台管理前端页面,部署服务器内网地址：   172.18.102.62      nginx服务端口：9091   /usr/share/nginx/html/trash-manage-ui
+	trash-manage-wechat-ui   微信公众号前端页面,部署服务器内网地址：         172.18.102.62      nginx服务端口：80    /imgs
+	
+	测试环境：
+	1)后台应用
+	user-platform            用户平台后台接口,部署服务器内网地址：           192.168.1.211      端口:8805   /root/onedt/app/user-platform
+	trash-manage             业务系统后台管理接口,部署服务器内网地址：       192.168.1.211      端口: 20003 /root/onedt/app/trash-manage
+	trash-manage-wx          微信前端接口,部署服务器内网地址：               192.168.1.211      端口: 20004  /root/onedt/app/trash-manage-wx
+	(trash-manage-wx外网映射113.106.86.11,映射端口9093) 
+	wechat-api               与微信公众号交互服务,部署服务器内网地址：       公司暂无80端口外网   端口：9998       未知
+	2)前端页面
+	user-platform-ui         用户平台前端页面,部署服务器内网地址：           113.106.86.11     nginx服务端口：9092 /usr/share/nginx/html/user-platform-ui
+	trash-manage-ui          业务系统后台管理前端页面,部署服务器内网地址：   113.106.86.11  nginx服务端口：9091  /usr/share/nginx/html/trash-manage-ui
+	trash-manage-wechat-ui   微信公众号前端页面,部署服务器内网地址：         公司暂无80端口外网          nginx服务端口：80    未知
+	
+三、项目中各个包及类意义说明。
+   	com.onedt.wx.Application: 项目启动入口
+   	com.onedt.wx.agent.MessageResponseAgent:处理微信公众号发过来的微信用户消息业务类
+   	com.onedt.wx.cache.WechatCacher:微信数据缓存数据工具类 
+   	com.onedt.wx.client.WechatUserClient:微信用户在手机端使用公众号时产生的业务,需要业务系统去实现
+   	com.onedt.wx.config.WebConfig:项目的Web请求配置
+   	com.onedt.wx.constants.WechatConstants:微信公众号业务接口涉及的常量
+   	com.onedt.wx.constants.WechatMessageType:定义微信公众号消息的类型
+   	com.onedt.wx.controller.TemplateNotifyController:微信模板通知发送控制器
+   	com.onedt.wx.controller.UploadImageController:微信前端上传图片控制器
+   	com.onedt.wx.controller.WechatMenuController:微信公众号菜单控制器
+   	com.onedt.wx.controller.WechatMessageController:微信公众号消息处理控制器
+   	com.onedt.wx.controller.WechatOauthController:微信公众号授权控制器
+   	com.onedt.wx.controller.WechatTagController:微信公众号标签控制器
+   	com.onedt.wx.entity.AccessToken:微信公众号accesstoken对象实体
+   	com.onedt.wx.entity.BaseMessage:微信公众号消息基础对象实体
+   	com.onedt.wx.entity.BaseWechatEntity:微信公众号共同属性对象实体
+   	com.onedt.wx.entity.JsTicket:微信公众号JsTicket对象实体
+   	com.onedt.wx.entity.MessageText:微信公众号文本消息对象实体
+   	com.onedt.wx.entity.Signature:微信公众号签名实体
+   	com.onedt.wx.entity.TemplateMessage:微信公众号模板实体
+   	com.onedt.wx.entity.UserOpenid:微信公众号openid实体
+   	com.onedt.wx.entity.WechatMenu:微信公众号菜单实体
+   	com.onedt.wx.entity.WechatOauthInfo:微信公众号授权信息实体
+   	com.onedt.wx.entity.WechatRoleTag:微信公众号角色标签实体
+   	com.onedt.wx.entity.WechatSysMenu:业务系统中的微信公众号菜单实体
+   	com.onedt.wx.entity.WechatSysRole:业务系统中的微信公众号角色实体
+   	com.onedt.wx.entity.WechatSysUser:业务系统中的微信用户实体
+   	com.onedt.wx.entity.WechatTag:微信公众号中的微信标签实体
+   	com.onedt.wx.entity.WechatTemplate:微信公众号中的微信模板实体
+   	com.onedt.wx.entity.WechatUserInfo:微信公众号中的微信用户信息实体
+   	com.onedt.wx.entity.WechatUserTag:微信公众号中的微信用户标签实体
+   	com.onedt.wx.entity.sys.CleanBookingSuccess:预约成功通知模板消息实体
+   	com.onedt.wx.entity.sys.CleanNewOrder:垃圾预约新增订单通知实体
+   	com.onedt.wx.entity.sys.CleanOrderChange:垃圾预约订单状态改变通知实体
+   	com.onedt.wx.entity.sys.CleanOrderFinish:垃圾预约订单完成通知实体
+   	com.onedt.wx.entity.sys.HttpCode:业务系统http请求状态码实体
+   	com.onedt.wx.entity.sys.ReqBodyObj:业务系统请求参数实体
+   	com.onedt.wx.entity.sys.RespBodyObj:业务系统请求响应实体
+   	com.onedt.wx.hystrix.WechatUserHystrix:远程调用业务错误异常处理类
+   	com.onedt.wx.init.WechatInit:微信消息处理初始化
+    com.onedt.wx.listener.ServerListener:系统启动监听器
+    com.onedt.wx.service.IMessageHandleService:微信公众号消息的业务接口
+    com.onedt.wx.service.IWechatMediaService:微信公众号素材业务类接口
+    com.onedt.wx.service.IWechatMenuService:微信公众号菜单业务类接口
+    com.onedt.wx.service.IWechatOauthService:微信公众号授权业务类接口
+    com.onedt.wx.service.IWechatServer:微信公众号消息推送业务类接口
+    com.onedt.wx.service.IWechatTagService:微信公众号标签业务类接口
+    com.onedt.wx.service.IWechatTemplateService:微信公众号模板业务类接口
+    com.onedt.wx.service.IWechatUserService:微信公众号用户业务类接口
+    com.onedt.wx.service.impl.MessageTextService:公众号文本消息处理业务实现类
+    com.onedt.wx.service.impl.SubHandleServiceImpl:用户关注公众号事件业务实现类
+    com.onedt.wx.service.impl.TemplateSendFinishServiceImpl:微信模板发送通知业务实现类
+    com.onedt.wx.service.impl.UnSubHandleServiceImpl：微信用户取消关注业务实现类
+    com.onedt.wx.service.impl.WechatMediaServiceImpl:微信素材业务实现类
+    com.onedt.wx.service.impl.WechatMenuServiceImpl:微信菜单业务实现类
+    com.onedt.wx.service.impl.WechatOauthServicImpl:微信授权业务实现类
+    com.onedt.wx.service.impl.WechatServerImpl:微信推送消息业务实现类
+    com.onedt.wx.service.impl.WechatTagServiceImpl:微信标签业务实现类
+    com.onedt.wx.service.impl.WechatTemplateServiceImpl:微信模板业务实现类
+    com.onedt.wx.service.impl.WechatUserServiceImpl:微信用户业务实现类
+    com.onedt.wx.utils.HttpUtils:http网络请求工具类
+    com.onedt.wx.utils.JacksonUtils:java对象与json格式转换工具类
+    com.onedt.wx.utils.PropertiesConfig:properties文件读取工具
+    com.onedt.wx.utils.SpringUtil:spring容器工具类
+    com.onedt.wx.utils.TemplateUtils:微信公众号模板通知工具类
+    com.onedt.wx.utils.WechatUtlis:微信公众号配置信息工具类
+    com.onedt.wx.utils.XmlUtils:微信公众号xml格式转换工具类
+    com.onedt.wx.utils.XstreamNameCoder:微信公众号xml格式工具类
+    src/main/resources/config/application.yml:springboot核心配置文件
+    src/main/resources/config/*.yml:不同公众号下的环境接口配置文件
+    src/main/resources/wechat/wechat.properties:公众号信息配置核心文件
+    src/main/resources/wechat/*t.properties:不同公众号信息配置文件
+    src/main/resources/logback.xml：系统日志配置文件
+    
+    

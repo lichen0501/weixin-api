@@ -1,0 +1,6 @@
+#业务平台ip地址(ET健康管理系统，正式环境)
+sys_api_url: http://127.0.0.1:20006
+#腾讯微信公众号服务器配置(ET健康管理系统，正式环境)
+wechat_api_url: /wechat
+#业务系统接口之微信用户注册(ET健康管理服务系统，正式环境)
+sys_api_addUser: /wechatuser

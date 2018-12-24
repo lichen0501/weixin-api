@@ -1,0 +1,37 @@
+server:
+  port: 9998
+  display-name: wechat-api
+  #context-path: /wechat/
+
+logging:
+  #level:
+    #com.onedt: TRACE
+  config: classpath:logback.xml
+
+spring:
+  application:
+    name: wechat-api
+  #http:
+  #  encoding:
+  #    force: true
+  #    charset: UTF-8
+  #    enabled: true
+ #\u6307\u5b9a\u9879\u76ee\u7684\u8fd0\u884c\u54ea\u4e2a\u516c\u4f17\u53f7\u7684\u73af\u5883\u3002\u53ef\u9009\uff1aetsk | szljfl | thz_prod | thz_test
+  profiles:  
+    active: xjwlw
+    
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+            
+feign:
+  hystrix:
+    enabled: true
+  httpclient: 
+    enabled: false
+  okhttp:
+    enabled: true
